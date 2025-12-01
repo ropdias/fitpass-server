@@ -26,6 +26,8 @@ jobs:
         run: npm i -g pnpm
       - name: Install dependencies with pnpm
         run: pnpm install --frozen-lockfile # installing dependencies from pnpm-lock.yaml
+      - name: Generate Prisma client
+        run: pnpm prisma generate
       - name: Run tests
         run: pnpm run test:e2e
         env:
