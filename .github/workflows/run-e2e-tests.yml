@@ -21,11 +21,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # github will create a cache of dependencies
-      - name: Install dependencies
-        run: npm ci # installing a clean install of devDependencies
+          cache: 'pnpm' # use pnpm cache
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - name: Install dependencies with pnpm
+        run: pnpm install --frozen-lockfile # installing dependencies from pnpm-lock.yaml
       - name: Run tests
-        run: npm run test:e2e
+        run: pnpm run test:e2e
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
